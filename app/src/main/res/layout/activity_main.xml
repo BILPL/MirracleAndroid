@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:orientation="vertical"
+        android:background="#ffffff"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content">
+    <ImageView
+        android:src="@drawable/wa"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_height="45dp"
+        android:layout_marginTop="18dp"
+        android:orientation="vertical"
+        android:layout_marginRight="18dp"
+        android:id="@+id/imgWapp"
+        android:layout_width="wrap_content"/>
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="#ffffff"
+        android:layout_gravity="center"
+        android:id="@+id/lnrNoInterNetConnection"
+        android:layout_height="fill_parent"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:src="@drawable/network_icon"
+            android:gravity="right"
+            android:layout_alignParentRight="true"
+            android:id="@+id/imgError"
+            android:layout_height="300dp"
+            android:padding="10dp"
+            android:layout_gravity="center_vertical" />
+        <TextView
+            android:id="@+id/txtEarnedPoints"
+            android:text="No Connection"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_gravity="bottom|right"
+            android:textColor="#000"
+            android:singleLine="true"
+            android:textSize="23dp" />
+        <TextView
+            android:id="@+id/txtErrorDesc"
+            android:text="Call +91 9100 181 181 if problem persists"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center_vertical"
+            android:textColor="#000000"
+            android:textSize="16dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp"
+            android:paddingLeft="10dp" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_marginTop="45dp"
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Retry"
+                android:padding="9dp"
+                android:gravity="center"
+                android:textSize="21dp"
+                android:textColor="#007eff"
+                android:id="@+id/btnRetry" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Go to settings"
+                android:gravity="center"
+                android:padding="9dp"
+                android:textSize="21dp"
+                android:textStyle="bold"
+                android:textColor="#007eff"
+                android:id="@+id/gotosettings" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

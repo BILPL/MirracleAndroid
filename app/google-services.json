@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "392074811423",
+    "firebase_url": "https://mirracle-63ccd.firebaseio.com",
+    "project_id": "mirracle-63ccd",
+    "storage_bucket": "mirracle-63ccd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:392074811423:android:00d6b3cb8649f29f",
+        "android_client_info": {
+          "package_name": "com.mirracle"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "392074811423-g4mb5c8ncekhip17va7ctgumuqgmsi3r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgIVwZGTs-P7V44eqzeZL0ra_VjnaqFkA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "392074811423-7hljr6aoj1cbq6svo2vncle4n4peuk2m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

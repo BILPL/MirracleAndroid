@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="#ffffff"
+    android:layout_height="match_parent">
+    <ImageView
+	    android:src="@drawable/wa"
+        android:layout_alignParentTop="true"
+		android:layout_alignParentRight="true"
+        android:layout_height="45dp"
+		android:layout_marginTop="18dp"
+		android:layout_marginRight="18dp"
+		android:id="@+id/imgWhatsapp"
+	    android:layout_width="wrap_content" />
+	<ImageView
+		android:src="@drawable/phone"
+		android:id="@+id/imgPhone"
+		android:layout_marginTop="9dp"
+		android:visibility="gone"
+		android:layout_alignParentTop="true"
+		android:layout_alignParentRight="true"
+		android:layout_height="36dp"
+		android:layout_width="wrap_content" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent"
+        android:id="@+id/linearLayout1">
+			<ImageView
+				android:src="@drawable/contacts"
+				android:gravity="center"
+				android:id="@+id/imgError"
+                android:layout_marginTop="200dp"
+				android:layout_height="350dp"
+				android:layout_width="350dp"
+				android:layout_gravity="center" />
+		<TextView
+			android:id="@+id/txtTitle"
+			android:text="Contacts"
+			android:layout_marginLeft="18dp"
+			android:gravity="center"
+			android:letterSpacing="0.2"
+			android:layout_marginRight="18dp"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:textColor="#000000"
+			android:textSize="36dp" />
+			<TextView
+				android:id="@+id/txtDescription"
+				android:text="Enable permission"
+				android:layout_marginLeft="18dp"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:layout_marginRight="18dp"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:textColor="#555"
+				android:textSize="23dp" />
+		<TextView
+			android:id="@+id/txtEnable"
+			android:text="Go to settings"
+			android:layout_marginLeft="18dp"
+			android:layout_marginTop="5dp"
+			android:gravity="center"
+			android:layout_marginRight="18dp"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:textColor="#007AFF"
+			android:textSize="25dp" />
+        </LinearLayout>
+	<RelativeLayout
+		android:layout_width="wrap_content"
+		android:orientation="vertical"
+		android:visibility="gone"
+		android:layout_marginTop="9dp"
+		android:layout_alignParentBottom="true"
+		android:layout_height="wrap_content">
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:id="@+id/lnrEnable"
+			android:gravity="center_horizontal"
+			android:layout_height="wrap_content"
+			>
+			<androidx.appcompat.widget.AppCompatButton
+				android:layout_width="match_parent"
+				android:text="GOTO SETTINGS"
+				android:background="#ee3268"
+				android:textSize="16dp"
+				android:gravity="center"
+				android:layout_margin="9dp"
+				android:id="@+id/btnEnable"
+				android:textColor="#fff"
+				android:layout_height="wrap_content"
+				android:textAllCaps="true" />
+		</LinearLayout>
+
+	</RelativeLayout>
+</RelativeLayout>

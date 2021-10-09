@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Pinnacle Blooms Network</string>
+    <string name="asset_statements">
+        [{
+            \"relation\": [\"delegate_permission/common.handle_all_urls\"],
+            \"target\": {
+                \"namespace\": \"web\",
+                \"site\": \"https://mirracle.pinnacleblooms.org\"}
+        }]
+    </string>
+    <string name="appwidget_text">Nawin</string>
+    <string name="add_widget">Add widget</string>
+    <string name="empty_string">Login to access your KPI</string>
+    <string name="widget_name">WebWidget</string>
+    <string name="dateTime">Today</string>
+    <array name="autosize_text_sizes">
+        <item>14sp</item>
+        <item>18sp</item>
+        <item>22sp</item>
+    </array>
+</resources>

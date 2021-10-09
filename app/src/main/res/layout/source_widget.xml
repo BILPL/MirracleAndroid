@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/border_white">
+    <GridView
+        android:paddingTop="5dp"
+        android:id="@+id/gridViewWidget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:verticalSpacing="9dp"
+        android:horizontalSpacing="9dp"
+        android:numColumns="3" >
+    </GridView>
+    <TextView
+        android:id="@+id/empty_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/empty_string"
+        android:textColor="#000"
+        android:textSize="20sp"
+        android:visibility="gone" />
+    <TextView
+        android:id="@+id/syncDateTime"
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:gravity="center"
+        android:layout_marginTop="9dp"
+        android:text="@string/dateTime"
+        android:textColor="#000"
+        android:textSize="14sp" />
+</LinearLayout>
