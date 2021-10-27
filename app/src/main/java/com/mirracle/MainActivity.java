@@ -93,12 +93,18 @@ public class MainActivity extends AppCompatActivity {
         Intent appLinkIntent = getIntent();
         Bundle remoteInput = RemoteInput.getResultsFromIntent(appLinkIntent);
 
+        String token = Utility.GetUserPreference(Constants.Token, this);
 
         Uri appLinkData = appLinkIntent.getData();
         String widgetURL = appLinkIntent.getStringExtra(Constants.WidgetItem);
         if(null == appLinkData && Utility.IsNullOrEmpty(widgetURL)){
-            urlscheme = "https://mirracle.pinnacleblooms.org/epass?ct=android";
-        }else if(!Utility.IsNullOrEmpty(widgetURL)){
+            if(!Utility.IsNullOrEmpty(token)) {
+                urlscheme = "https://mirracle.pinnacleblooms.org/d?ct=android";
+            }
+            else {
+                urlscheme = "https://mirracle.pinnacleblooms.org/epass?ct=android";
+            }
+        } else if(!Utility.IsNullOrEmpty(widgetURL)){
             widgetURL = widgetURL.toLowerCase().contains("widgeturl") ? widgetURL.split("widgeturl=")[1] : widgetURL;
             urlscheme = widgetURL;
         }
@@ -132,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
                     repliedNotification.build());
 
         }
-        String token = Utility.GetUserPreference(Constants.Token, this);
+
         //Checking if network available and loading the web activity
        if(Utility.isNetworkAvailable(this) || !Utility.IsNullOrEmpty(token)) {
             runOnUiThread(new Runnable() {
@@ -141,6 +147,9 @@ public class MainActivity extends AppCompatActivity {
                     if (ActivityCompat.checkSelfPermission(mainActivity, Manifest.permission.READ_CONTACTS)
                             == PackageManager.PERMISSION_GRANTED && isNotifenabled ) {
                         StartPWA(mainActivity);
+                        if(!Utility.IsNullOrEmpty(token)) {
+                            Utility.SyncContactsToServer(mainActivity);
+                        }
                     } else {
                         Intent intent = new Intent(mainActivity, SplashActivity.class);
                         startActivity(intent);

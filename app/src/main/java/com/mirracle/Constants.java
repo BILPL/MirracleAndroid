@@ -22,6 +22,8 @@ public class Constants {
 
     public static String ContactsLastSyncDateTime = "";
 
+    public  static String SyncedNumbers = "SyncedNumbers";
+
     public static String DeviceToken = "DEVICETOKEN";
 
     public static String DeviceId = "DeviceId";

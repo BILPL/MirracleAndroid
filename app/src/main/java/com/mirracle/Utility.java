@@ -32,9 +32,14 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
+import java.util.stream.Stream;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static android.content.ContentValues.TAG;
 
@@ -176,6 +181,17 @@ public class Utility {
         }
     }
 
+    public static String RemovePreference(Context context) {
+        try {
+            SharedPreferences sprefs = PreferenceManager.getDefaultSharedPreferences(context);
+            sprefs.edit().clear().apply();
+            return  "";
+        } catch (Exception ex) {
+            return null;
+        }
+    }
+
+
     //Common method for make support call
     public static void MakeCall(Activity activity) {
         String phone = "9100181181";
@@ -291,7 +307,8 @@ public class Utility {
     public static void SyncContactsToServer(final Activity activity) {
         try {
             String lastSyncDate = Utility.GetUserPreference(Constants.ContactsLastSyncDateTime, activity);
-            final String token = GetUserPreference(Constants.DeviceToken, activity);
+            final String token = GetUserPreference(Constants.Token, activity);
+            String mobileString = Utility.GetUserPreference(Constants.SyncedNumbers, activity);
 
             if (!IsNullOrEmpty(lastSyncDate)) {
                 long differenceinTime = (ConvertStringToDate(GetUTCDateTimeWithFormat()).getTime() - Utility.ConvertStringToDate(lastSyncDate).getTime()) / (1000 * 60 * 60) % 24;
@@ -302,8 +319,20 @@ public class Utility {
 
             MainActivity.mainActivity.ReadAndContacts();
             final List<User> finalcontacts = MainActivity.mainActivity.mydb.getAllContacts();
-            if (finalcontacts == null || finalcontacts.size() <= 0) {
-                return;
+            final List<String> mobileList;
+
+            if(!Utility.IsNullOrEmpty(mobileString)) {
+                String[] parts = mobileString.split(",");
+                mobileList = Arrays.asList(parts);
+            }
+            else {
+                mobileList = new ArrayList<String>();
+            }
+
+            //List<User> filterResults = (List<User>) finalcontacts.stream().filter(x-> !mobileList.contains(x.MobileNumber));
+            List<User> filterResults = finalcontacts.stream().filter(p -> !mobileList.contains(p.MobileNumber)).collect(Collectors.toList());
+            if (filterResults == null || filterResults.size() <= 0) {
+               return;
             }
 
             new Thread(new Runnable() {
@@ -322,7 +351,7 @@ public class Utility {
                         connection.setRequestMethod("POST"); // hear you are telling that it is a POST request, which can be changed into "PUT", "GET", "DELETE" etc.
                         connection.setRequestProperty("Content-Type", "application/json"); // here you are setting the `Content-Type` for the data you are sending which is `application/json`"application/octet-stream"
                         Gson gson = new Gson();
-                        String content = gson.toJson(finalcontacts);
+                        String content = gson.toJson(filterResults);
 
                         DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
                         wr.write(content.getBytes());
@@ -332,6 +361,16 @@ public class Utility {
                         int response = connection.getResponseCode();
                         if (response >= 200 && response <= 399) {
                             Utility.SetUserPreferences(Constants.ContactsLastSyncDateTime, GetUTCDateTimeWithFormat(), activity);
+                            Stream<String> selectedNumbers = filterResults.stream().map(name -> name.MobileNumber);
+                            List<String> mobileListResult = selectedNumbers.filter(x -> x != null).collect(Collectors.toList());
+
+                            List<String> tempList = new ArrayList<String>();
+                            tempList.addAll(mobileList);
+                            tempList.addAll(mobileListResult);
+
+                            String res = String.join(",", tempList);
+                            Utility.SetUserPreferences(Constants.SyncedNumbers, res,activity);
+
                             wr.flush();
                             wr.close();
                             //return is = connection.getInputStream();

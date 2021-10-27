@@ -80,11 +80,15 @@ public class DashboardActivity extends AppCompatActivity {
                 case "settings":
                     Utility.OpenNetworkSettings(this);
                     break;
+                case "logoff":
+                    Utility.RemovePreference(this);
+                    break;
             }
         }
+
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS)
                 == PackageManager.PERMISSION_GRANTED) {
-            Utility.SyncContactsToServer(this);
+            //Utility.SyncContactsToServer(this);
         } else {
             SplashActivity.splashActivity.Pokhran();
         }
