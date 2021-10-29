@@ -9,6 +9,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -194,6 +195,7 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, com.google.androidbrowserhelper.trusted.LauncherActivity.class);
             intent.setData(Uri.parse(urlscheme));
             intent.putExtra("url",urlscheme);
+
             startActivityForResult(intent, 55);
             //startActivityForResult(intent, 99);
             context.finish();

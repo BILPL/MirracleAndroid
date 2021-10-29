@@ -14,7 +14,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Mirracle" >
 
-
         <service
             android:name=".WidgetService"
             android:enabled="true"
@@ -30,8 +29,14 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/widget_info" />
         </receiver>
-        <activity android:name=".SplashActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".SplashActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"
+            />
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -52,10 +57,15 @@
         </activity>
         <activity
             android:name=".DashboardActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"
             android:windowSoftInputMode="adjustResize">
             <meta-data
                 android:name="android.support.customtabs.trusted.DEFAULT_URL"
                 android:value="https://mirracle.pinnacleblooms.org/" />
+
+            <meta-data android:name="android.support.customtabs.trusted.SCREEN_ORIENTATION"
+                android:value="portrait"/>
 
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
@@ -66,10 +76,17 @@
                 <data android:scheme="mirraclescheme" />
             </intent-filter>
         </activity>
-        <activity android:name="com.google.androidbrowserhelper.trusted.LauncherActivity">
+        <activity
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"
+            android:name="com.google.androidbrowserhelper.trusted.LauncherActivity">
             <meta-data
                 android:name="android.support.customtabs.trusted.DEFAULT_URL"
                 android:value="https://mirracle.pinnacleblooms.org/" />
+
+            <meta-data android:name="android.support.customtabs.trusted.SCREEN_ORIENTATION"
+                android:value="portrait"/>
         </activity>
 
         <meta-data
