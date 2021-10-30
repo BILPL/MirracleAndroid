@@ -92,6 +92,7 @@ public class DashboardActivity extends AppCompatActivity {
         } else {
             SplashActivity.splashActivity.Pokhran();
         }
+
         this.finish();
     }
 }

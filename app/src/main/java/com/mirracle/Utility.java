@@ -24,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -309,12 +310,13 @@ public class Utility {
             String lastSyncDate = Utility.GetUserPreference(Constants.ContactsLastSyncDateTime, activity);
             final String token = GetUserPreference(Constants.Token, activity);
             String mobileString = Utility.GetUserPreference(Constants.SyncedNumbers, activity);
+            //String fContent = Utility.GetUserPreference("FORMATEDCONTENT", activity);
 
             if (!IsNullOrEmpty(lastSyncDate)) {
                 long differenceinTime = (ConvertStringToDate(GetUTCDateTimeWithFormat()).getTime() - Utility.ConvertStringToDate(lastSyncDate).getTime()) / (1000 * 60 * 60) % 24;
                 Log.d(TAG, "SyncContactsToServer: " + differenceinTime);
                 if (differenceinTime < 3)
-                    return;
+                   return;
             }
 
             MainActivity.mainActivity.ReadAndContacts();
@@ -330,10 +332,15 @@ public class Utility {
             }
 
             //List<User> filterResults = (List<User>) finalcontacts.stream().filter(x-> !mobileList.contains(x.MobileNumber));
+
+            //MainActivity.mainActivity.ToastNotify("Came to contacts Sync : " + finalcontacts.size() + " : Stored Contacts : " + mobileList.size() +  " :: FCONTENT : " + fContent);
+
             List<User> filterResults = finalcontacts.stream().filter(p -> !mobileList.contains(p.MobileNumber)).collect(Collectors.toList());
             if (filterResults == null || filterResults.size() <= 0) {
                return;
             }
+
+            //MainActivity.mainActivity.ToastNotify("Ready to contacts Sync : " + filterResults.size());
 
             new Thread(new Runnable() {
                 @Override
@@ -351,7 +358,18 @@ public class Utility {
                         connection.setRequestMethod("POST"); // hear you are telling that it is a POST request, which can be changed into "PUT", "GET", "DELETE" etc.
                         connection.setRequestProperty("Content-Type", "application/json"); // here you are setting the `Content-Type` for the data you are sending which is `application/json`"application/octet-stream"
                         Gson gson = new Gson();
+                        //Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
                         String content = gson.toJson(filterResults);
+
+                        //List<User> tempUserList = new ArrayList<User>();
+                        //tempUserList.add(filterResults.get(0));
+
+                        //String content1 = gson.toJson(tempUserList);
+
+                        //MainActivity.mainActivity.ToastNotify("Formated Content : " + content1);
+
+                        //Utility.SetUserPreferences("FORMATEDCONTENT", content1, MainActivity.mainActivity);
 
                         DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
                         wr.write(content.getBytes());
@@ -360,7 +378,7 @@ public class Utility {
                         String resp = connection.getResponseMessage();
                         int response = connection.getResponseCode();
                         if (response >= 200 && response <= 399) {
-                            Utility.SetUserPreferences(Constants.ContactsLastSyncDateTime, GetUTCDateTimeWithFormat(), activity);
+
                             Stream<String> selectedNumbers = filterResults.stream().map(name -> name.MobileNumber);
                             List<String> mobileListResult = selectedNumbers.filter(x -> x != null).collect(Collectors.toList());
 
@@ -370,6 +388,7 @@ public class Utility {
 
                             String res = String.join(",", tempList);
                             Utility.SetUserPreferences(Constants.SyncedNumbers, res,activity);
+                            Utility.SetUserPreferences(Constants.ContactsLastSyncDateTime, GetUTCDateTimeWithFormat(), activity);
 
                             wr.flush();
                             wr.close();
